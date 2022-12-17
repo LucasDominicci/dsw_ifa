@@ -1,11 +1,11 @@
 {
-  "name": "dsw_ifa",
-  "version": "1.0.0",
-  "description": "IFA de dsw",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Lucas",
-  "license": "ISC"
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
+    "@fortawesome/free-regular-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/vue-fontawesome": "^3.0.2",
+    "sequelize": "^6.21.4",
+    "sqlite3": "^5.0.11"
+  }
 }
