@@ -1,5 +1,4 @@
 const { Router } = require("express")
-
 const ProdutoController = require("../controllers/ProdutoController")
 
 const routes = Router()

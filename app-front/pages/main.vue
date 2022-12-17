@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <!-- Tela inicial com várias funções de conta -->
+        <!-- Tela inicial -->
         <div class="invent-cards content_page" v-if="inicioView">
             <h2>Bem vindo a padaria</h2>
             <hr />
@@ -43,12 +43,15 @@
                 <a href="#" class="icon_carrinho_compras" v-on:click="abrir_carrinho()">
                     <h2 id="text_carrinho">Carrinho <i class="fas fa-dolly"></i></h2>
                 </a>
+
+                <p class="btn_item inserir_produto" v-b-modal.modal-produto v-on:click="objeto_adicionar(1)"><i
+                        class="fas fa-plus"></i> Inserir novo produto</p>
             </div>
             <hr />
             <!-- <input type="text" class="search" placeholder="Pesquisar por um produto"> -->
 
-            <hr v-if="(produtos.length > 0)" />
-            <h4 v-if="(produtos.length > 0)">Produtos em destaque <i class="fas fa-store"></i></h4>
+            <!-- <hr v-if="(produtos.length > 0)" /> -->
+            <!-- <h4 v-if="(produtos.length > 0)">Produtos em destaque <i class="fas fa-store"></i></h4> -->
 
             <!-- Produtos do marketplace -->
             <div id="lista_itens_marketplace">
@@ -173,7 +176,7 @@ export default {
             produtosRegistradosView: false,
             carrinhoPainelView: false,
 
-            operacao: this.createNewLoja,
+            operacao: this.createNewProduto,
 
             titulo_modal: 'Cadastro de produto',
 
@@ -254,14 +257,13 @@ export default {
         createNewProduto: function (event) {
             event.preventDefault();
 
+            console.log(this.objetoProduto)
+
             // Veja mais sobre em https://axios.nuxtjs.org/usage
             this.$axios
                 .$post("produto", this.objetoProduto)
                 .then(() => {
                     this.updateProduto();
-
-                    // Atualizando a lista de itens da loja
-                    this.atualiza_itens_loja(this.objetoProduto.idLoja)
 
                     this.$bvModal.hide('modal-produto');
                     this.operacao = this.createNewProduto;
