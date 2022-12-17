@@ -51,7 +51,7 @@ export default {
           this.$axios
               .post("http://localhost:5000/login", this.login)
               .then((response) => {
-                  this.$store.commit('setToken', response.data.token)
+                //   this.$store.commit('setToken', response.data.token)
                   this.$router.push("/main");
               })
               .catch((error) => {

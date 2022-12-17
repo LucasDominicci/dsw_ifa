@@ -11,19 +11,19 @@
                 <!-- Botão de Inicio -->
                 <b-navbar-nav>
                     <b-nav-item class='icons_nav_menu' v-on:click="desativa_views(0)">
-                        <h3 class="buttn_icon_menu">Página inicial</h3>
+                        <p class="buttn_icon_menu">Página inicial</p>
                     </b-nav-item>
 
                     <!-- Botão do marketplace -->
-                    <b-nav-item v-if="lojas.length > 0" class='icons_nav_menu' v-on:click="
-                        desativa_views(1)">
-                        <h3 class="buttn_icon_menu">Produtos</h3>
+                    <b-nav-item class='icons_nav_menu' v-on:click="
+                    desativa_views(1)">
+                        <p class="buttn_icon_menu">Produtos</p>
                     </b-nav-item>
 
                     <!-- Botão de Ações -->
-                    <b-nav-item v-if="acoes.length > 0" class='icons_nav_menu' v-on:click="
-                        desativa_views(2)">
-                        <h3 class="buttn_icon_menu">Carrinho de compras</h3>
+                    <b-nav-item class='icons_nav_menu' v-on:click="
+                    desativa_views(2)">
+                        <p class="buttn_icon_menu">Carrinho de compras</p>
                     </b-nav-item>
                 </b-navbar-nav>
             </div>
@@ -31,14 +31,14 @@
 
         <!-- Tela inicial com várias funções de conta -->
         <div class="invent-cards content_page" v-if="inicioView">
-            <h2>Olá!</h2>
+            <h2>Bem vindo a padaria</h2>
             <hr />
         </div>
 
         <!-- Listad de produtos -->
         <div class="invent-cards content_page" v-if="produtoView">
             <div>
-                <h2>Produtos da padoka</h2>
+                <h2>Produtos da padoca</h2>
 
                 <a href="#" class="icon_carrinho_compras" v-on:click="abrir_carrinho()">
                     <h2 id="text_carrinho">Carrinho <i class="fas fa-dolly"></i></h2>
@@ -47,7 +47,7 @@
             <hr />
             <!-- <input type="text" class="search" placeholder="Pesquisar por um produto"> -->
 
-            <hr v-if="(produtos.length > 0)"/>
+            <hr v-if="(produtos.length > 0)" />
             <h4 v-if="(produtos.length > 0)">Produtos em destaque <i class="fas fa-store"></i></h4>
 
             <!-- Produtos do marketplace -->
@@ -56,14 +56,16 @@
 
                     <a href="#">
                         <div class="item_marketplace">
-                            <h3 class="nome_item_marketplace">{{produto.nome}}</h3>
+                            <h3 class="nome_item_marketplace">{{ produto.nome }}</h3>
 
-                            <p class="preco_item_marketplace">R${{produto.preco}}</p>
+                            <p class="preco_item_marketplace">R${{ produto.preco }}</p>
 
                             <div class="opcoes_item">
-                                <p class="btn_opcao_item" v-b-modal.modal-produto v-on:click="objeto_edita(1, produto.id)"><i class="fas fa-pen"></i></p>
+                                <p class="btn_opcao_item" v-b-modal.modal-produto
+                                    v-on:click="objeto_edita(1, produto.id)"><i class="fas fa-pen"></i></p>
 
-                                <p class="btn_opcao_item btn_opcao_excluir" v-on:click="removeSelectedProduto(produto.id)"><i class="fas fa-trash"></i></p>
+                                <p class="btn_opcao_item btn_opcao_excluir"
+                                    v-on:click="removeSelectedProduto(produto.id)"><i class="fas fa-trash"></i></p>
                             </div>
                         </div>
                     </a>
@@ -81,7 +83,10 @@
                 <h3>Seu carrinho está vazio! Adicione produtos para poder visualizar por aqui!</h3>
             </div> -->
 
-            <a href="#" class="a_btn_link"><p class="btn_item btn_retornar_pag" style="float: right; margin-top: 25px;" v-on:click="carrinhoPainelView = false">Retornar</p></a>
+            <a href="#" class="a_btn_link">
+                <p class="btn_item btn_retornar_pag" style="float: right; margin-top: 25px;"
+                    v-on:click="carrinhoPainelView = false">Retornar</p>
+            </a>
         </div>
 
         <!-- Modal para inserir ou editar produto -->
@@ -90,7 +95,7 @@
                 <b-form v-on:submit="operacao">
                     <label class="mr-sm-2" for="input_nome_produto">Nome do item:</label>
                     <b-form-input id="input_nome_produto" v-model="objetoProduto.nome" class="mb-2 mr-sm-2 mb-sm-0"
-                        placeholder="Ex: Bolo de chocolate" required></b-form-input> <br /> 
+                        placeholder="Ex: Bolo de chocolate" required></b-form-input> <br />
 
                     <label class="mr-sm-2" for="input_quantidade">Quantidade em estoque:</label>
                     <b-form-input v-model="objetoProduto.quantidade" id="input_quantidade" class="mb-2 mr-sm-2 mb-sm-0"
@@ -123,7 +128,7 @@
 export default {
     async asyncData({ store, $axios, redirect }) {
 
-        const authToken = store.state.authenticationToken || 'null'
+        const authToken = 'null'
         // se tiver carregando client side, recupera o token do usuário
 
         // Check if user is logged in.
@@ -133,7 +138,7 @@ export default {
             redirect("/");
         } else {
             // This means that there IS a JWT so someone must be logged in.
-            $axios.defaults.headers.common.Authorization = `Bearer ${authToken}`; 
+            $axios.defaults.headers.common.Authorization = `Bearer ${authToken}`;
             // salva o token para usar nos headers nas requisições
         }
 
@@ -147,12 +152,12 @@ export default {
             console.log(ex);
         }
 
-        try{
-            const response = await $axios.$get('carrinho');
-            itens_carrinho = response;
-        } catch (ex) {
-            console.log(ex);
-        }
+        // try{
+        //     const response = await $axios.$get('carrinho');
+        //     itens_carrinho = response;
+        // } catch (ex) {
+        //     console.log(ex);
+        // }
 
         return { produtos, carrinho }
     },
@@ -197,11 +202,11 @@ export default {
 
     methods: {
 
-        deslogar: function() {
+        deslogar: function () {
             window.location.href = "/";
         },
 
-        objeto_adicionar: function(caso){
+        objeto_adicionar: function (caso) {
 
             this.objetoProduto = {
                 nome: null,
@@ -210,7 +215,7 @@ export default {
                 preco: null
             },
 
-            this.btn_edit_produto = false;
+                this.btn_edit_produto = false;
             this.titulo_modal = "Cadastro de Produto";
             this.operacao = this.createNewProduto;
         },
@@ -222,16 +227,16 @@ export default {
             this.carrinhoView = false;
 
             // 0 -> Inicio, 1 -> Produtos, 2 -> Carrinho
-            if(alvo == 0)
+            if (alvo == 0)
                 this.inicioView = true;
-            else if(alvo == 1)
+            else if (alvo == 1)
                 this.produtoView = true;
             else
                 this.carrinhoView = true;
         },
 
-        objeto_edita: function(caso, id_alvo){
-            
+        objeto_edita: function (caso, id_alvo) {
+
             this.$axios.$get(`produto/${id_alvo}`).then((response) => {
                 this.objetoProduto = response[0];
 
@@ -241,7 +246,7 @@ export default {
             });
         },
 
-        abrir_carrinho: function() {
+        abrir_carrinho: function () {
 
             this.carrinhoPainelView = true;
         },
@@ -271,17 +276,17 @@ export default {
             event.preventDefault();
 
             this.$axios
-            .$post("produto/update", this.objetoProduto)
-            .then(() => {
-                this.updateProduto();
+                .$post("produto/update", this.objetoProduto)
+                .then(() => {
+                    this.updateProduto();
 
-                this.$bvModal.hide('modal-produto');
-                this.operacao = this.createNewProduto;
-            })
-            .catch((error) => {
-                console.error('Não foi possível atualizar o produto selecionado.');
-                console.log(error);
-            });
+                    this.$bvModal.hide('modal-produto');
+                    this.operacao = this.createNewProduto;
+                })
+                .catch((error) => {
+                    console.error('Não foi possível atualizar o produto selecionado.');
+                    console.log(error);
+                });
         },
 
         updateProduto: function () {
@@ -291,7 +296,7 @@ export default {
                 this.$bvModal.hide('modal-produto');
                 this.operacao = this.createNewProduto;
 
-                if(this.produtos.length < 1)
+                if (this.produtos.length < 1)
                     this.produtosRegistradosView = false;
             })
         },

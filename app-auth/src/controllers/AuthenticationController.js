@@ -7,8 +7,6 @@ module.exports = {
             const userLogin = await UserService.getByUsername(req.body.username);
 
             if (userLogin) {
-
-                console.log(req.body.pwd, userLogin.pwd)
                 const authenticated = await utils.comparePwd(req.body.pwd, userLogin.pwd)
 
                 if (authenticated) {
